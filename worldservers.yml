@@ -1,0 +1,9 @@
+---
+- name: Deploy Valheim dedicated server
+  hosts: worldservers
+  become: yes
+  roles:
+    - role: common
+      tags: common
+    - role: vhserver
+      tags: vhserver

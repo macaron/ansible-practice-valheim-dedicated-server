@@ -1,0 +1,10 @@
+---
+- name: Add the group 'vhserver'
+  ansible.builtin.group:
+    name: vhserver
+
+- name: Add the user 'vhserver'
+  ansible.builtin.user:
+    name: vhserver
+    group: vhserver
+    password: "{{ vhserver_password | password_hash('sha512', 'salt') }}"

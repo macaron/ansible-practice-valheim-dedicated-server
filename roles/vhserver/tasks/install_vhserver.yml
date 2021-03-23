@@ -1,0 +1,15 @@
+---
+- name: Copy linuxgsm.sh
+  copy:
+    src: files/linuxgsm.sh
+    dest: /home/vhserver/linuxgsm.sh
+    owner: vhserver
+    group: vhserver
+    mode: 0744
+
+- name: Download linuxgsm
+  ansible.builtin.command: "bash linuxgsm.sh vhserver list"
+  args:
+    chdir: /home/vhserver
+  become: yes
+  become_user: vhserver

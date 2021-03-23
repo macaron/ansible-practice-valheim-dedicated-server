@@ -1,0 +1,40 @@
+---
+- name: Add i386 Architecture
+  command: dpkg --add-architecture i386
+  args:
+    creates: /var/lib/dpkg/arch
+  when: ansible_architecture != 'i386'
+  register: archrc
+
+- name: debconf auto agree to steamcmd
+  ansible.builtin.debconf:
+    name: steamcmd
+    question: steam/question
+    value: I AGREE
+    vtype: select
+
+- name: Install dependencies packages
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name:
+      - curl
+      - wget
+      - file
+      - tar
+      - bzip2
+      - gzip
+      - unzip
+      - bsdmainutils
+      - python
+      - util-linux
+      - ca-certificates
+      - binutils
+      - bc
+      - jq
+      - tmux
+      - netcat
+      - lib32gcc1
+      - lib32stdc++6
+      - libsdl2-2.0-0:i386
+      - steamcmd
